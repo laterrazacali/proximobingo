@@ -11,10 +11,10 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://laterrazacali.github.io/proximobingo/">
 
+<!-- Aseguramos que el cronómetro esté visible en la parte superior -->
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-html, body {height: 100%;}
-body{font-family:Arial,sans-serif;background:radial-gradient(circle at top,#2d0a52,#0b0017 60%);color:white; display:flex; justify-content:center; align-items:flex-start; flex-direction:column;}
+body{font-family:Arial,sans-serif;background:radial-gradient(circle at top,#2d0a52,#0b0017 60%);color:white;}
 .container{max-width:480px;margin:auto;padding:5px;}
 .hero{border:2px solid #d16cff;border-radius:15px;padding:10px;text-align:center;
 box-shadow:0 0 15px #b347ff;background:rgba(40,0,70,.8);}
@@ -23,7 +23,7 @@ box-shadow:0 0 15px #b347ff;background:rgba(40,0,70,.8);}
 .count{display:flex;justify-content:space-around;font-size:2.5em;font-weight:bold;color:#fff;text-shadow:0 0 18px #ff4dff;margin:5px 0;}
 .count div{text-align:center;}
 .count div span.label{display:block;font-size:0.55em;color:#ffd700;text-shadow:0 0 6px #ffd700;}
-.cards{display:flex;flex-wrap:wrap;gap:6px;justify-content:space-between;margin-top:10px;}
+.cards{display:flex;flex-wrap:wrap;gap:6px;justify-content:space-between;}
 .card{flex:1 1 calc(50% - 6px);padding:6px;border-radius:12px;border:2px solid #d16cff;
 background:rgba(20,0,40,.85);box-shadow:0 0 10px rgba(209,108,255,.6);text-align:center;}
 .card.fullwidth{flex:1 1 100%;}
@@ -36,8 +36,8 @@ background:linear-gradient(90deg,#7a1fff,#ff2ed1);color:white;box-shadow:0 0 10p
 </head>
 <body>
 
-<div class="container" id="main-container">
-<div class="hero" id="hero">
+<div class="container">
+<div class="hero">
 <a class="btn fullwidth" href="https://www.youtube.com/live/c_utE_Ew6nA?si=yKYDEQv4fFAMw0ey">🔴 EN VIVO POR YOUTUBE</a>
 <h1 class="title">PRÓXIMO BINGO</h1>
 <div class="date-text" id="bingo-date">Cargando fecha...</div>
@@ -50,6 +50,7 @@ background:linear-gradient(90deg,#7a1fff,#ff2ed1);color:white;box-shadow:0 0 10p
 </div>
 
 <div class="cards">
+<!-- Resto de contenido -->
 <div class="card fullwidth">
 <h2>🚀 Únete a nuestra comunidad</h2>
 <a href="https://chat.whatsapp.com/Bt6eNH5etbw9k570JjIsVy">
@@ -95,11 +96,6 @@ const diasSemana = ["domingo","lunes","martes","miércoles","jueves","viernes","
 const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 const targetDate = new Date(`${fechaParam}T${horaParam}:00`);
 document.getElementById("bingo-date").innerText = `El bingo será el ${diasSemana[targetDate.getDay()]} ${targetDate.getDate()} de ${meses[targetDate.getMonth()]} de ${targetDate.getFullYear()}`;
-
-// Centrar hero en la pantalla para previsualización
-window.addEventListener('load', () => {
-  document.getElementById('hero').scrollIntoView({behavior: "auto", block: "center"});
-});
 
 // Cronómetro
 function update(){

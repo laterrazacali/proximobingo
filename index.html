@@ -11,7 +11,7 @@ body{font-family:Arial,sans-serif;background:radial-gradient(circle at top,#2d0a
 .hero{border:2px solid #d16cff;border-radius:15px;padding:10px;text-align:center;
 box-shadow:0 0 15px #b347ff;background:rgba(40,0,70,.8);}
 .title{font-size:1.5em;font-weight:900;text-shadow:0 0 10px #ffdc4d;color:#ffd700;margin:3px 0;}
-.count{font-size:1.5em;font-weight:bold;color:#fff;text-shadow:0 0 12px #ff4dff;margin:5px 0;} /* Aumentado un poco */
+.count{font-size:1.5em;font-weight:bold;color:#fff;text-shadow:0 0 12px #ff4dff;margin:5px 0;}
 .subtitle{font-size:0.9em;margin-bottom:5px;}
 .cards{display:flex;flex-wrap:wrap;gap:6px;justify-content:space-between;}
 .card{flex:1 1 calc(50% - 6px);padding:6px;border-radius:12px;border:2px solid #d16cff;
@@ -31,7 +31,7 @@ background:linear-gradient(90deg,#7a1fff,#ff2ed1);color:white;box-shadow:0 0 10p
 <a class="btn fullwidth" href="https://www.youtube.com/live/c_utE_Ew6nA?si=yKYDEQv4fFAMw0ey">🔴 EN VIVO POR YOUTUBE</a>
 <h1 class="title">PRÓXIMO BINGO</h1>
 <div id="count" class="count">Cargando...</div>
-<div class="subtitle">Domingo 7 de junio de 2026 • 7:30 PM</div>
+<div class="subtitle">Fecha y hora del bingo configurable por URL</div>
 </div>
 
 <div class="cards">
@@ -71,16 +71,22 @@ background:linear-gradient(90deg,#7a1fff,#ff2ed1);color:white;box-shadow:0 0 10p
 </div>
 
 <script>
-const target=new Date("2026-06-07T19:30:00");
+// Obtener fecha y hora desde URL: ?fecha=YYYY-MM-DD&hora=HH:MM
+const params = new URLSearchParams(window.location.search);
+const fechaParam = params.get('fecha') || "2026-06-07";
+const horaParam = params.get('hora') || "19:30";
+const target = new Date(`${fechaParam}T${horaParam}:00`);
+
 function update(){
-let d=target-new Date();
-if(d<0)d=0;
-let days=Math.floor(d/86400000);
-let hrs=Math.floor(d/3600000)%24;
-let min=Math.floor(d/60000)%60;
-let sec=Math.floor(d/1000)%60;
-document.getElementById("count").innerHTML=
-`${days}d ${hrs}h ${min}m ${sec}s`;
+    let d = target - new Date();
+    if(d < 0) d = 0;
+    let days = Math.floor(d / 86400000);
+    let hrs = Math.floor(d / 3600000) % 24;
+    let min = Math.floor(d / 60000) % 60;
+    let sec = Math.floor(d / 1000) % 60;
+    // Mostrar solo números, con ceros a la izquierda
+    document.getElementById("count").innerHTML =
+        `${String(days).padStart(2,'0')} ${String(hrs).padStart(2,'0')} ${String(min).padStart(2,'0')} ${String(sec).padStart(2,'0')}`;
 }
 setInterval(update,1000);
 update();

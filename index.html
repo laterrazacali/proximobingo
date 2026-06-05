@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>La Terraza Bingo</title>
+
+<!-- Meta para miniatura al compartir en redes -->
+<meta property="og:title" content="La Terraza Bingo">
+<meta property="og:description" content="¡No te pierdas el próximo bingo!">
+<meta property="og:image" content="cronometro.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://laterrazacali.github.io/proximobingo/">
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:Arial,sans-serif;background:radial-gradient(circle at top,#2d0a52,#0b0017 60%);color:white;}
@@ -12,9 +20,10 @@ body{font-family:Arial,sans-serif;background:radial-gradient(circle at top,#2d0a
 box-shadow:0 0 15px #b347ff;background:rgba(40,0,70,.8);}
 .title{font-size:1.5em;font-weight:900;text-shadow:0 0 10px #ffdc4d;color:#ffd700;margin:3px 0;}
 .date-text{font-size:0.95em;margin-bottom:5px;}
-.count{display:flex;justify-content:space-around;font-size:1.3em;font-weight:bold;color:#fff;text-shadow:0 0 12px #ff4dff;margin:5px 0;}
+/* Cronómetro grande y llamativo */
+.count{display:flex;justify-content:space-around;font-size:2.5em;font-weight:bold;color:#fff;text-shadow:0 0 18px #ff4dff;margin:5px 0;}
 .count div{text-align:center;}
-.count div span.label{display:block;font-size:0.7em;color:#ffd700;text-shadow:0 0 6px #ffd700;}
+.count div span.label{display:block;font-size:0.9em;color:#ffd700;text-shadow:0 0 8px #ffd700;}
 .cards{display:flex;flex-wrap:wrap;gap:6px;justify-content:space-between;}
 .card{flex:1 1 calc(50% - 6px);padding:6px;border-radius:12px;border:2px solid #d16cff;
 background:rgba(20,0,40,.85);box-shadow:0 0 10px rgba(209,108,255,.6);text-align:center;}

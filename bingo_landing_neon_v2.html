@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La Terraza Bingo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Arial,sans-serif;background:radial-gradient(circle at top,#2d0a52,#0b0017 60%);color:white;}
+.container{max-width:480px;margin:auto;padding:5px;}
+.hero{border:2px solid #d16cff;border-radius:15px;padding:10px;text-align:center;
+box-shadow:0 0 15px #b347ff;background:rgba(40,0,70,.8);}
+.title{font-size:1.5em;font-weight:900;text-shadow:0 0 10px #ffdc4d;color:#ffd700;margin:3px 0;}
+.count{font-size:1.5em;font-weight:bold;color:#fff;text-shadow:0 0 12px #ff4dff;margin:5px 0;} /* Aumentado un poco */
+.subtitle{font-size:0.9em;margin-bottom:5px;}
+.cards{display:flex;flex-wrap:wrap;gap:6px;justify-content:space-between;}
+.card{flex:1 1 calc(50% - 6px);padding:6px;border-radius:12px;border:2px solid #d16cff;
+background:rgba(20,0,40,.85);box-shadow:0 0 10px rgba(209,108,255,.6);text-align:center;}
+.card.fullwidth{flex:1 1 100%;}
+.card h2{margin:0 0 3px;color:#ffd700;text-shadow:0 0 6px #ffd700;font-size:0.85em;}
+img{width:100%;height:auto;border-radius:10px;margin-bottom:3px;}
+img.tabla{max-width:50%;margin-left:auto;margin-right:auto;display:block;}
+.btn{display:block;margin:3px auto;padding:6px;border-radius:8px;font-weight:bold;font-size:0.85em;text-decoration:none;
+background:linear-gradient(90deg,#7a1fff,#ff2ed1);color:white;box-shadow:0 0 10px #ff2ed1;text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="container">
+<div class="hero">
+<a class="btn fullwidth" href="https://www.youtube.com/live/c_utE_Ew6nA?si=yKYDEQv4fFAMw0ey">🔴 EN VIVO POR YOUTUBE</a>
+<h1 class="title">PRÓXIMO BINGO</h1>
+<div id="count" class="count">Cargando...</div>
+<div class="subtitle">Domingo 7 de junio de 2026 • 7:30 PM</div>
+</div>
+
+<div class="cards">
+
+<div class="card fullwidth">
+<h2>🚀 Únete a nuestra comunidad</h2>
+<a href="https://chat.whatsapp.com/Bt6eNH5etbw9k570JjIsVy">
+<img src="invitacionalgrupo.png" alt="Comunidad">
+</a>
+<a class="btn" href="https://chat.whatsapp.com/Bt6eNH5etbw9k570JjIsVy">INGRESAR</a>
+</div>
+
+<div class="card fullwidth">
+<h2>🎟️ Adquiere tu tabla</h2>
+<a href="https://wa.me/573234370590">
+<img src="tabla.png" alt="Comprar Tabla" class="tabla">
+</a>
+<a class="btn" href="https://wa.me/573234370590">COMPRAR</a>
+</div>
+
+<div class="card">
+<h2>📜 Reglas 1</h2>
+<img src="regla1.png" alt="Regla 1">
+</div>
+<div class="card">
+<h2>📜 Reglas 2</h2>
+<img src="regla2.png" alt="Regla 2">
+</div>
+
+<div class="card fullwidth">
+<h2>▶️ Transmisión anterior</h2>
+<img src="trans.png" alt="Transmisión Anterior">
+<a class="btn" href="https://www.youtube.com/live/AAiFDoVSjjg?si=UP0gt6Tn_N3XsWGU">VER</a>
+</div>
+
+</div>
+</div>
+
+<script>
+const target=new Date("2026-06-07T19:30:00");
+function update(){
+let d=target-new Date();
+if(d<0)d=0;
+let days=Math.floor(d/86400000);
+let hrs=Math.floor(d/3600000)%24;
+let min=Math.floor(d/60000)%60;
+let sec=Math.floor(d/1000)%60;
+document.getElementById("count").innerHTML=
+`${days}d ${hrs}h ${min}m ${sec}s`;
+}
+setInterval(update,1000);
+update();
+</script>
+
+</body>
+</html>

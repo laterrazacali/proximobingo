@@ -11,8 +11,10 @@ body{font-family:Arial,sans-serif;background:radial-gradient(circle at top,#2d0a
 .hero{border:2px solid #d16cff;border-radius:15px;padding:10px;text-align:center;
 box-shadow:0 0 15px #b347ff;background:rgba(40,0,70,.8);}
 .title{font-size:1.5em;font-weight:900;text-shadow:0 0 10px #ffdc4d;color:#ffd700;margin:3px 0;}
-.count{font-size:1.5em;font-weight:bold;color:#fff;text-shadow:0 0 12px #ff4dff;margin:5px 0;}
-.subtitle{font-size:0.9em;margin-bottom:5px;}
+.date-text{font-size:0.95em;margin-bottom:5px;}
+.count{display:flex;justify-content:space-around;font-size:1.3em;font-weight:bold;color:#fff;text-shadow:0 0 12px #ff4dff;margin:5px 0;}
+.count div{text-align:center;}
+.count div span.label{display:block;font-size:0.7em;color:#ffd700;text-shadow:0 0 6px #ffd700;}
 .cards{display:flex;flex-wrap:wrap;gap:6px;justify-content:space-between;}
 .card{flex:1 1 calc(50% - 6px);padding:6px;border-radius:12px;border:2px solid #d16cff;
 background:rgba(20,0,40,.85);box-shadow:0 0 10px rgba(209,108,255,.6);text-align:center;}
@@ -30,8 +32,13 @@ background:linear-gradient(90deg,#7a1fff,#ff2ed1);color:white;box-shadow:0 0 10p
 <div class="hero">
 <a class="btn fullwidth" href="https://www.youtube.com/live/c_utE_Ew6nA?si=yKYDEQv4fFAMw0ey">🔴 EN VIVO POR YOUTUBE</a>
 <h1 class="title">PRÓXIMO BINGO</h1>
-<div id="count" class="count">Cargando...</div>
-<div class="subtitle">Fecha y hora del bingo configurable por URL</div>
+<div class="date-text" id="bingo-date">Cargando fecha...</div>
+<div class="count">
+  <div><span id="days">00</span><span class="label">Días</span></div>
+  <div><span id="hours">00</span><span class="label">Horas</span></div>
+  <div><span id="minutes">00</span><span class="label">Minutos</span></div>
+  <div><span id="seconds">00</span><span class="label">Segundos</span></div>
+</div>
 </div>
 
 <div class="cards">
@@ -77,6 +84,16 @@ const fechaParam = params.get('fecha') || "2026-06-07";
 const horaParam = params.get('hora') || "19:30";
 const target = new Date(`${fechaParam}T${horaParam}:00`);
 
+// Mostrar fecha y día
+const diasSemana = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const targetDate = new Date(`${fechaParam}T${horaParam}:00`);
+const diaSemana = diasSemana[targetDate.getDay()];
+const dia = targetDate.getDate();
+const mes = meses[targetDate.getMonth()];
+const anio = targetDate.getFullYear();
+document.getElementById("bingo-date").innerText = `El bingo será el ${diaSemana} ${dia} de ${mes} de ${anio}`;
+
 function update(){
     let d = target - new Date();
     if(d < 0) d = 0;
@@ -84,10 +101,13 @@ function update(){
     let hrs = Math.floor(d / 3600000) % 24;
     let min = Math.floor(d / 60000) % 60;
     let sec = Math.floor(d / 1000) % 60;
-    // Mostrar solo números, con ceros a la izquierda
-    document.getElementById("count").innerHTML =
-        `${String(days).padStart(2,'0')} ${String(hrs).padStart(2,'0')} ${String(min).padStart(2,'0')} ${String(sec).padStart(2,'0')}`;
+
+    document.getElementById("days").innerText = String(days).padStart(2,'0');
+    document.getElementById("hours").innerText = String(hrs).padStart(2,'0');
+    document.getElementById("minutes").innerText = String(min).padStart(2,'0');
+    document.getElementById("seconds").innerText = String(sec).padStart(2,'0');
 }
+
 setInterval(update,1000);
 update();
 </script>

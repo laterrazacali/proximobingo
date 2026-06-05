@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>La Terraza Bingo</title>
 
-<!-- Meta para miniatura al compartir en redes -->
+<!-- Meta para miniatura de redes sociales -->
 <meta property="og:title" content="La Terraza Bingo">
 <meta property="og:description" content="¡No te pierdas el próximo bingo!">
-<meta property="og:image" content="cronometro.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://laterrazacali.github.io/proximobingo/">
 
+<!-- Aseguramos que el cronómetro esté visible en la parte superior -->
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:Arial,sans-serif;background:radial-gradient(circle at top,#2d0a52,#0b0017 60%);color:white;}
@@ -50,7 +50,7 @@ background:linear-gradient(90deg,#7a1fff,#ff2ed1);color:white;box-shadow:0 0 10p
 </div>
 
 <div class="cards">
-
+<!-- Resto de contenido -->
 <div class="card fullwidth">
 <h2>🚀 Únete a nuestra comunidad</h2>
 <a href="https://chat.whatsapp.com/Bt6eNH5etbw9k570JjIsVy">
@@ -81,41 +81,31 @@ background:linear-gradient(90deg,#7a1fff,#ff2ed1);color:white;box-shadow:0 0 10p
 <img src="trans.png" alt="Transmisión Anterior">
 <a class="btn" href="https://www.youtube.com/live/AAiFDoVSjjg?si=UP0gt6Tn_N3XsWGU">VER</a>
 </div>
-
 </div>
 </div>
 
 <script>
-// Obtener fecha y hora desde URL: ?fecha=YYYY-MM-DD&hora=HH:MM
+// Fecha configurable desde URL
 const params = new URLSearchParams(window.location.search);
 const fechaParam = params.get('fecha') || "2026-06-07";
 const horaParam = params.get('hora') || "19:30";
 const target = new Date(`${fechaParam}T${horaParam}:00`);
 
-// Mostrar fecha y día
+// Mostrar día de la semana y fecha
 const diasSemana = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
 const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 const targetDate = new Date(`${fechaParam}T${horaParam}:00`);
-const diaSemana = diasSemana[targetDate.getDay()];
-const dia = targetDate.getDate();
-const mes = meses[targetDate.getMonth()];
-const anio = targetDate.getFullYear();
-document.getElementById("bingo-date").innerText = `El bingo será el ${diaSemana} ${dia} de ${mes} de ${anio}`;
+document.getElementById("bingo-date").innerText = `El bingo será el ${diasSemana[targetDate.getDay()]} ${targetDate.getDate()} de ${meses[targetDate.getMonth()]} de ${targetDate.getFullYear()}`;
 
+// Cronómetro
 function update(){
     let d = target - new Date();
     if(d < 0) d = 0;
-    let days = Math.floor(d / 86400000);
-    let hrs = Math.floor(d / 3600000) % 24;
-    let min = Math.floor(d / 60000) % 60;
-    let sec = Math.floor(d / 1000) % 60;
-
-    document.getElementById("days").innerText = String(days).padStart(2,'0');
-    document.getElementById("hours").innerText = String(hrs).padStart(2,'0');
-    document.getElementById("minutes").innerText = String(min).padStart(2,'0');
-    document.getElementById("seconds").innerText = String(sec).padStart(2,'0');
+    document.getElementById("days").innerText = String(Math.floor(d / 86400000)).padStart(2,'0');
+    document.getElementById("hours").innerText = String(Math.floor(d / 3600000) % 24).padStart(2,'0');
+    document.getElementById("minutes").innerText = String(Math.floor(d / 60000) % 60).padStart(2,'0');
+    document.getElementById("seconds").innerText = String(Math.floor(d / 1000) % 60).padStart(2,'0');
 }
-
 setInterval(update,1000);
 update();
 </script>
